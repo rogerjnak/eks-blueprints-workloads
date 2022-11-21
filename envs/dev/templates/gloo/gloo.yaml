@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: gloo
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  destinations:
+    - namespace: gloo-system
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - https://storage.googleapis.com/solo-public-helm
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: gloo
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: gloo
+  destination:
+    namespace: gloo-system
+    server: {{ .Values.spec.destination.server }}
+  source:
+    repoURL: https://storage.googleapis.com/solo-public-helm
+    targetRevision: 1.12.35
+    helm:
+      releaseName: gloo
+  syncPolicy:
+    automated:
+      prune: true
+    syncOptions:
+    - CreateNamespace=true
