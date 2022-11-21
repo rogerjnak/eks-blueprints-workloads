@@ -11,6 +11,9 @@ spec:
       server: https://kubernetes.default.svc
   sourceRepos:
     - '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'    
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
@@ -29,7 +32,6 @@ spec:
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
-        version: v3
         values: |
         # no values takes the default values.yaml
   syncPolicy:
