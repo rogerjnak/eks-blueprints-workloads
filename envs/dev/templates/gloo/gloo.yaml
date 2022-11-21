@@ -25,13 +25,15 @@ spec:
     namespace: gloo-system
     server: {{ .Values.spec.destination.server }}
   source:
-    chart: gloo/gloo
+    chart: gloo
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
-      releaseName: gloo
+        values: |
+        # no values takes the default values.yaml
   syncPolicy:
     automated:
       prune: true
+      selfHeal: true
     syncOptions:
     - CreateNamespace=true
