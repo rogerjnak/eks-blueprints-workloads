@@ -29,7 +29,7 @@ spec:
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
-        version: v1
+        version: v2
         values: |
         # no values takes the default values.yaml
   syncPolicy:
