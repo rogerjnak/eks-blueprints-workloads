@@ -10,7 +10,7 @@ spec:
     - namespace: gloo-system
       server: https://kubernetes.default.svc
   sourceRepos:
-    - https://storage.googleapis.com/solo-public-helm
+    - '*'
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
