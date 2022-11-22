@@ -33,7 +33,7 @@ spec:
     targetRevision: 1.12.35
     helm:
         values: |
-        # no values takes the default values.yaml
+        {{- toYaml .Values | nindent 8 }}
   syncPolicy:
     automated:
       prune: true
