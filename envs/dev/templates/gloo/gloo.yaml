@@ -32,8 +32,8 @@ spec:
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
-        valueFiles:
-        - values2.yaml
+        values: |
+        {{- toYaml .Values.gloo | nindent 8 }}
   syncPolicy:
     automated:
       prune: true
