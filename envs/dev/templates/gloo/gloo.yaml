@@ -26,14 +26,14 @@ spec:
   project: gloo
   destination:
     namespace: gloo-system
-    server: {{ .Values.spec.destination.server }}
+    server: {{ .Values.app.spec.destination.server }}
   source:
     chart: gloo
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
         values: |
-        {{- toYaml .Values.gloo | nindent 8 }}
+        {{- toYaml .Values.gloo | nindent 10 }}
   syncPolicy:
     automated:
       prune: true

@@ -4,17 +4,17 @@ metadata:
   name: team-riker
   namespace: argocd
   labels:
-    {{- toYaml .Values.labels | nindent 4 }}  
+    {{- toYaml .Values.app.labels | nindent 4 }}  
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   destination:
     namespace: team-riker
-    server: {{ .Values.spec.destination.server }}
+    server: {{ .Values.app.spec.destination.server }}
   source:
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
+    repoURL: {{ .Values.app.spec.source.repoURL }}
+    targetRevision: {{ .Values.app.spec.source.targetRevision }}
     path: teams/team-riker/dev
     helm:
       values: |
