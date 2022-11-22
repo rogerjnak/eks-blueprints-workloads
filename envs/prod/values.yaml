@@ -15,41 +15,4 @@ spec:
   ingress:
     type: 'alb' # nginx | alb
     host: # empty or your domain like dev.example.com
-  gloo:
-    discovery:
-      enabled: false
-    gatewayProxies:
-      gatewayProxy:
-        service:
-          extraAnnotations:
-            service.beta.kubernetes.io/aws-load-balancer-type: 'external'
-            service.beta.kubernetes.io/aws-load-balancer-scheme: 'internet-facing'
-            service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: 'instance'
-            service.beta.kubernetes.io/aws-load-balancer-backend-protocol: 'http'
-            service.beta.kubernetes.io/aws-load-balancer-ssl-cert: 'arn:aws:acm:us-east-1:306609338925:certificate/64eca2c7-ea86-4dd2-92c3-0efc61013524' # the ARN of your x509 certificate
-            service.beta.kubernetes.io/aws-load-balancer-ssl-ports: '443' # enable TLS on this port
-            # both the HTTPS and HTTP port are exposed by the NLB
-          httpPort: 80
-          httpsFirst: true
-          httpsPort: 443
-          type: LoadBalancer
-          kubeResourceOverride:
-            spec:
-              ports:
-                - name: http
-                  port: 80
-                  protocol: TCP
-                  targetPort: 8090 # NLB listener on port 80 will redirect traffic to the Gateway listening on port 8090
-                - name: https
-                  port: 443
-                  protocol: TCP
-                  targetPort: 8080 # regular traffic
-        gatewaySettings:
-          disableHttpsGateway: true
-          customHttpsGateway: # using the default HTTPS Gateway
-            virtualServiceExpressions:
-              expressions:
-                - key: gloo-role
-                  operator: NotEquals
-                  values:
-                    - redirect-https
+  
