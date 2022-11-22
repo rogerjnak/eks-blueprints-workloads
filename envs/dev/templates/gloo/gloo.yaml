@@ -32,7 +32,7 @@ spec:
     repoURL: https://storage.googleapis.com/solo-public-helm
     targetRevision: 1.12.35
     helm:
-        values:
+        valueFiles:
         - values.yaml
   syncPolicy:
     automated:
